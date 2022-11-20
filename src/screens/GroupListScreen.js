@@ -1,9 +1,13 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, Button } from 'react-native'
 
-const GroupListScreen = () => {
+const GroupListScreen = (props) => {
     return <View>
         <Text style={{ fontSize: 48 }}>GroupListScreen</Text>
+        <Button title="Go to Group Detail"
+        onPress={() => {props.navigation.navigate("GroupDetail")}} />
+        <Button title="Create Group"
+        onPress={() => {props.navigation.navigate("GroupCreate")}} />
     </View>
 }
 

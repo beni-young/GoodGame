@@ -9,6 +9,7 @@ import GroupCreateScreen from './src/screens/GroupCreateScreen';
 import GroupDetailScreen from './src/screens/GroupDetailScreen';
 import GroupListScreen from './src/screens/GroupListScreen';
 import ChatScreen from './src/screens/ChatScreen';
+import MapScreen from './src/screens/MapScreen';
 
 const switchNavigator = createSwitchNavigator({
     loginFlow: createStackNavigator({
@@ -16,14 +17,14 @@ const switchNavigator = createSwitchNavigator({
       Signin: SigninScreen
     }),
     mainFlow: createBottomTabNavigator({
+      Chat: ChatScreen,      
+      Map: MapScreen,
+      Account: AccountScreen,
       GroupListFlow: createStackNavigator ({
         GroupList: GroupListScreen,
-        GroupDetail: GroupDetailScreen
-      }),
-      GroupCreate: GroupCreateScreen,
-      Account: AccountScreen,
-      Chat: ChatScreen
-
+        GroupDetail: GroupDetailScreen,
+        GroupCreate: GroupCreateScreen
+      }), 
     })
 });
 
