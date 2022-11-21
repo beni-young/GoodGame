@@ -1,12 +1,19 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import React, {useEffect, useState} from 'react'
+import { StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import Map from '../components/Map'
+import { Text } from 'react-native-elements'
+import { requestForgroundPermissionAsync } from 'expo-location';
 
 const MapScreen = () => {
-    return <View>
-        <Text style={{ fontSize: 48 }}>MapScreen</Text>
-    </View>
+    return <SafeAreaView>
+        <Text h3>MapScreen</Text>
+        <Map />
+    </SafeAreaView>
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+
+});
 
 export default MapScreen;
