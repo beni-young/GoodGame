@@ -67,7 +67,7 @@ expo r -c
 
 ## Notes
 1. Ngrok and MongoDB will have to be setup for the app to take in User Authentication
-please provide your own api tokens
+please provide your own api tokens. The only api so far is in /src/api/googlemaps.js, just need to change the baseUrl
 
 2. under node_modules/react-navigation-tabs/lib/module/utils/withDimensions.js:
 comment out line 57 -- Dimensions.removeEventListener('change', this.handleOrientationChange);
