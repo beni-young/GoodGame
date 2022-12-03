@@ -24,13 +24,17 @@ const GroupDetailScreen = (props) => {
 GroupDetailScreen.navigationOptions = (props) => {
     return {
         headerRight: () => (
-            <TouchableOpacity onPress={() => { props.navigation.navigate("GroupEdit") }}>
-                <FontAwesome name="pencil" size={20} />
+            <TouchableOpacity onPress={() => { props.navigation.navigate("GroupEdit", {id: props.navigation.getParam("id")}) }}>
+                <FontAwesome style={styles.pencil} name="pencil" size={40} />
             </TouchableOpacity>
         ),
     };
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    pencil: {
+        marginRight: 25
+    }
+});
 
 export default GroupDetailScreen;

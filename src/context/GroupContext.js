@@ -15,6 +15,15 @@ const groupReducer = (state, action) => {
                 return state.filter((groupPost) => {
                     return groupPost.id !== action.payload
                 });
+            case 'edit_group':
+                return state.map((groupPost) => {
+                    if(groupPost.id === action.payload.id) {
+                        return action.payload;
+                    }
+                    else {
+                        return groupPost;
+                    }
+                })
             default:
                 return state;
         }
@@ -33,7 +42,15 @@ const groupReducer = (state, action) => {
             dispatch({ type: 'delete_group', payload: id })
         }
     }
+
+    const editGroup = (dispatch) => {
+        return (id, title, description, callback) => {
+            dispatch({type: 'edit_group', payload: { id: id, title: title, description: description}})
+            callback();
+        }
+    }
     
 
 export const {Provider, Context} = createDataContext(
-    groupReducer, {addGroup, deleteGroup}, []);
+    groupReducer, {addGroup, deleteGroup, editGroup}, 
+    [{id: 1, title: "Test Group", description: "Test Description"}]);
