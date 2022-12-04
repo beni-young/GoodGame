@@ -4,13 +4,11 @@ import { Provider as PaperProvider, Text, TextInput, Button } from 'react-native
 import {Context} from "../context/GroupContext"
 import GroupPostForm from '../components/GroupPostForm';
 
-const GroupCreateScreen = (props) => {
-
-    
+const GroupCreateScreen = (props) => {    
 
     const {addGroup} = useContext(Context);
     return <GroupPostForm onSubmit={(title, description) => {
-        addGroup(title, description, () => { props.navigation.navigate("GroupDetail")})
+        addGroup(title, description, () =>  {props.navigation.pop()})
     }} />
    
 }
@@ -20,3 +18,4 @@ const styles = StyleSheet.create({
 });
 
 export default GroupCreateScreen;
+
