@@ -20,6 +20,8 @@ const GroupDetailScreen = (props) => {
         <Text>{groupPost.description}</Text>
         <Text>{groupPost.latitude}</Text>
         <Text>{groupPost.longitude}</Text>
+        <Text>{groupPost.gamelist}</Text>
+        <Text>{groupPost.gametype}</Text>
     </View>
 }
 

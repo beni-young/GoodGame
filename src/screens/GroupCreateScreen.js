@@ -7,8 +7,8 @@ import GroupPostForm from '../components/GroupPostForm';
 const GroupCreateScreen = (props) => {    
 
     const {addGroup} = useContext(Context);
-    return <GroupPostForm onSubmit={(title, description, latitude, longitude) => {
-        addGroup(title, description, latitude, longitude, () =>  {props.navigation.pop()})
+    return <GroupPostForm onSubmit={(title, description, latitude, longitude, gamelist, gametype) => {
+        addGroup(title, description, latitude, longitude, gamelist, gametype, () =>  {props.navigation.pop()})
     }} />
    
 }

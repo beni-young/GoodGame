@@ -16,8 +16,12 @@ const GroupEditScreen = (props) => {
     )
 
     return <GroupPostForm 
-            onSubmit={(title, description) => { editGroup(groupID, title, description, () => {props.navigation.pop()})}}
-                initialValues={ {title: groupPost.title, description: groupPost.description}}
+            onSubmit={(title, description, latitude, longitude, gamelist, gametype) => 
+                { editGroup(groupID, title, description, latitude, longitude, gamelist, gametype,
+                  () => {props.navigation.pop()})}}
+                initialValues={ {title: groupPost.title, description: groupPost.description,
+                                 latitude: groupPost.latitude, longitude: groupPost.longitude,
+                                 gamelist: groupPost.gamelist, gametype: groupPost.gametype}}
               />
 }
 

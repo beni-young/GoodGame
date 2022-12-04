@@ -1,37 +1,37 @@
 import React, {useContext, useState} from 'react'
-import { View, StyleSheet, KeyboardAvoidingView, SafeAreaView, ScrollView} from 'react-native'
-import { Provider as PaperProvider, Text, TextInput, Button } from 'react-native-paper';
+import { View, StyleSheet, ScrollView, LogBox} from 'react-native'
+import { Text, TextInput, Button } from 'react-native-paper';
 import {Context} from "../context/GroupContext";
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
 
-
 const GroupPostForm = (props) => {     
 
-    const [selected, setSelected] = useState([]);
+    const [gametype, setGameType] = useState(props.initialValues.gametype);
 
     const data = [
-        {key: 1, value: 'TableTop'},
-        {key: 2, value: 'First Person Shooter'},
-        {key: 3, value: 'MMORPG'},
-        {key: 4, value: 'Casual'},
-        {key: 5, value: 'Playstation'},
-        {key: 6, value: 'Xbox'},
-        {key: 7, value: 'Switch'},
-        {key: 8, value: 'PC'},
-        {key: 9, value: 'Sports'},
+        {key: 1, value: ' TableTop'},
+        {key: 2, value: ' First Person Shooter'},
+        {key: 3, value: ' MMORPG'},
+        {key: 4, value: ' Casual'},
+        {key: 5, value: ' Playstation'},
+        {key: 6, value: ' Xbox'},
+        {key: 7, value: ' Switch'},
+        {key: 8, value: ' PC'},
+        {key: 9, value: ' Sports'},
     ]
 
     const [title, setTitle] = useState(props.initialValues.title);
     const [description, setDescription] = useState(props.initialValues.description);
-    const [googleRegion, setGoogleRegion] = useState({
-        latitude: 30.023432002000366, 
-        longitude: -90.06559621153748
-    }); 
+    const [gamelist, setGameList] = useState(props.initialValues.gamelist);
+    const [googleRegion, setGoogleRegion] = useState(
+        props.initialValues.latitude, 
+        props.initialValues.longitude        
+    ); 
     
 
     return <View style={styles.searchContainer} > 
-        <ScrollView > 
+        <ScrollView keyboardShouldPersistTaps='always'> 
         <Text style={styles.label}>Location</Text>           
         <GooglePlacesAutocomplete       
             placeholder='Set Your Group Location'
@@ -67,26 +67,27 @@ const GroupPostForm = (props) => {
         <TextInput style={styles.input} mode="outlined" value={description} 
             onChangeText={(text) => setDescription(text)}></TextInput>
 
-        <Text style={styles.label}>Describe who should join and what you'll do.</Text>
-        <TextInput style={styles.input} mode="outlined" value={description} 
-            onChangeText={(text) => setDescription(text)}></TextInput>
-
-         <Text style={styles.label}>Describe who should join and what you'll do.</Text>
-        <TextInput style={styles.input} mode="outlined" value={description} 
-            onChangeText={(text) => setDescription(text)}></TextInput>
+        <Text style={styles.label}>Enter a list of games.</Text>
+        <TextInput style={styles.input} mode="outlined" value={gamelist} 
+            onChangeText={(text) => setGameList(text)}></TextInput>
         
-        <Text style={styles.label}>Type of games you play.</Text>
+        <Text style={styles.label}>Select the type of group games.</Text>
         <MultipleSelectList
             boxStyles={styles.multiselect}
-            setSelected={(val) => setSelected(val)}
+            setSelected={(val) => setGameType(val)}
             data={data}
             save="value"            
-            label="Game Types"        
+            label="Game Types" 
+            defaultOption={data.map((type) => {
+                if (props.initialValues.gametype === type.value) {
+                    {{type.key, type.value}}
+                }
+            })}       
         />
         
         <Button style={styles.button} mode="contained"
             onPress={() => 
-            {props.onSubmit(title, description, googleRegion.latitude, googleRegion.longitude);}}>Save Group</Button> 
+            {props.onSubmit(title, description, googleRegion.latitude, googleRegion.longitude, gamelist, gametype );}}>Save Group</Button> 
     </ScrollView>
     </View>   
     
@@ -98,20 +99,21 @@ GroupPostForm.defaultProps = {
     initialValues: {
         title: "",
         description: "",
-        latitude: "",
-        longitude: ""
+        latitude: 30.023432002000366,
+        longitude: -90.06559621153748,
+        gamelist: "",
+        gametype: []
     }
 }
 
 const styles = StyleSheet.create({
     input: {
         fontSize: 15,
-        padding: 5,
+        paddingBottom: 5,
         margin: 10
     },
     label: {
-        fontSize: 15,
-        marginBottom: 3,
+        fontSize: 14,        
         marginLeft: 10
     },
     button: {
@@ -138,5 +140,6 @@ const styles = StyleSheet.create({
         margin: 15
     }
 })
+LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
 
 export default GroupPostForm;
