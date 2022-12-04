@@ -27,6 +27,11 @@ Whether you're looking to meet new people, learn new games, find groups to play 
 
 ## Install the following libraries
 ```bash
+Use the following command to install all the dependencies in package.json:
+npm install --legacy-peer-deps
+
+The following are the individual commands used in creation:
+
 install react navigation:
 npm install react-navigation --legacy-peer-deps
 
