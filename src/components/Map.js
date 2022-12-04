@@ -22,7 +22,9 @@ const Map = (props) => {
     const [googleRegion, setGoogleRegion] = useState({
         latitude: 30.023432002000366, 
         longitude: -90.06559621153748
-    });    
+    });   
+    
+    
 
     return <View>   
         <MapView style={styles.map} 
@@ -31,44 +33,48 @@ const Map = (props) => {
                 longitude: -90.0680,
                 latitudeDelta: 0.01,
                 longitudeDelta: 0.01,
-            }}   
-    >       
-        <Marker draggable coordinate={{latitude: 30.01947000085054, longitude: -90.06525841636753}}
-            title={"Hello!!!"}            
-         />
-        
-         <Marker coordinate={testRegion} title={"Test!!!"} />         
-         <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Google"} />
-          
-                   
-         
-    </MapView>
-    <View style={styles.searchContainer}>
-    <GooglePlacesAutocomplete       
-        placeholder='Set Your Group Location'
-        fetchDetails={true}
-        GooglePlacesSearchQuery={{
-            rankby: "distance"
-        }}
-        onPress={(data, details = null) => {
-        // 'details' is provided when fetchDetails = true
-        console.log(data, details);       
-        setGoogleRegion({
-            latitude: details.geometry.location.lat,
-            longitude: details.geometry.location.lng,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01,
-        })
-        }}
-      query={{ 
-        key: 'AIzaSyAQc2g4VdIeTkjNEjUvcMQ1mtYCQHIUhQQ', 
-        language: 'en',
-        components: "country:us",
-        radius: 30000, 
-        location: `${googleRegion.latitude}, ${googleRegion.longitude}`
-        }}
-    />
-    </View>
+        }}>
+            {state.map((marker) => (
+                <Marker
+                    coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
+                    title={marker.title}
+                    description={marker.description}
+                />
+            ))}
+
+            <Marker draggable coordinate={{latitude: 30.01947000085054, longitude: -90.06525841636753}} title={"Hello!!!"} />
+            <Marker coordinate={testRegion} title={"Test!!!"} />         
+            <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Google"} />
+            
+
+
+        </MapView>
+        <View style={styles.searchContainer}>
+            <GooglePlacesAutocomplete       
+                placeholder='Set Your Group Location'
+                fetchDetails={true}
+                GooglePlacesSearchQuery={{
+                    rankby: "distance"
+                }}
+                onPress={(data, details = null) => {
+                    // 'details' is provided when fetchDetails = true
+                    console.log({state});       
+                    setGoogleRegion({
+                        latitude: details.geometry.location.lat,
+                        longitude: details.geometry.location.lng,
+                        latitudeDelta: 0.01,
+                        longitudeDelta: 0.01,
+                    })
+                }}
+                query={{ 
+                    key: 'AIzaSyAQc2g4VdIeTkjNEjUvcMQ1mtYCQHIUhQQ', 
+                    language: 'en',
+                    components: "country:us",
+                    radius: 30000, 
+                    location: `${googleRegion.latitude}, ${googleRegion.longitude}`
+                }}
+            />
+        </View>
     </View>    
 };
 
