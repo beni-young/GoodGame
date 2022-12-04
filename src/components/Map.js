@@ -23,8 +23,6 @@ const Map = (props) => {
         latitude: 30.023432002000366, 
         longitude: -90.06559621153748
     });   
-    
-    
 
     return <View>   
         <MapView style={styles.map} 
@@ -81,7 +79,7 @@ const Map = (props) => {
 
 const styles = StyleSheet.create({
     map: {
-        height: 600
+        height: 900
     },
     searchContainer: {
         position: "absolute",

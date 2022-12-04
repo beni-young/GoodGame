@@ -3,9 +3,24 @@ import { View, StyleSheet, KeyboardAvoidingView, SafeAreaView, ScrollView} from 
 import { Provider as PaperProvider, Text, TextInput, Button } from 'react-native-paper';
 import {Context} from "../context/GroupContext";
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import { MultipleSelectList } from 'react-native-dropdown-select-list'
 
 
 const GroupPostForm = (props) => {     
+
+    const [selected, setSelected] = useState([]);
+
+    const data = [
+        {key: 1, value: 'TableTop'},
+        {key: 2, value: 'First Person Shooter'},
+        {key: 3, value: 'MMORPG'},
+        {key: 4, value: 'Casual'},
+        {key: 5, value: 'Playstation'},
+        {key: 6, value: 'Xbox'},
+        {key: 7, value: 'Switch'},
+        {key: 8, value: 'PC'},
+        {key: 9, value: 'Sports'},
+    ]
 
     const [title, setTitle] = useState(props.initialValues.title);
     const [description, setDescription] = useState(props.initialValues.description);
@@ -15,9 +30,8 @@ const GroupPostForm = (props) => {
     }); 
     
 
-    return <SafeAreaView style={{ flex: 1}}>   
-    
-        <View style={styles.searchContainer}> 
+    return <View style={styles.searchContainer} > 
+        <ScrollView > 
         <Text style={styles.label}>Location</Text>           
         <GooglePlacesAutocomplete       
             placeholder='Set Your Group Location'
@@ -53,11 +67,31 @@ const GroupPostForm = (props) => {
         <TextInput style={styles.input} mode="outlined" value={description} 
             onChangeText={(text) => setDescription(text)}></TextInput>
 
+        <Text style={styles.label}>Describe who should join and what you'll do.</Text>
+        <TextInput style={styles.input} mode="outlined" value={description} 
+            onChangeText={(text) => setDescription(text)}></TextInput>
+
+         <Text style={styles.label}>Describe who should join and what you'll do.</Text>
+        <TextInput style={styles.input} mode="outlined" value={description} 
+            onChangeText={(text) => setDescription(text)}></TextInput>
+        
+        <Text style={styles.label}>Type of games you play.</Text>
+        <MultipleSelectList
+            boxStyles={styles.multiselect}
+            setSelected={(val) => setSelected(val)}
+            data={data}
+            save="value"            
+            label="Game Types"        
+        />
+        
         <Button style={styles.button} mode="contained"
             onPress={() => 
             {props.onSubmit(title, description, googleRegion.latitude, googleRegion.longitude);}}>Save Group</Button> 
-    </View>     
-</SafeAreaView>
+    </ScrollView>
+    </View>   
+    
+
+
 }
 
 GroupPostForm.defaultProps = {
@@ -85,7 +119,7 @@ const styles = StyleSheet.create({
         padding: 10,         
     },
     searchContainer: {
-        position: "absolute",
+        flex: 1,        
         width: "90%",
         backgroundColor: "white",
         shadowColor: "black", 
@@ -97,7 +131,12 @@ const styles = StyleSheet.create({
         marginTop: 10,
         marginLeft: 20,
         borderRadius: 8,
-    },  
+        borderWidth: 1,
+        borderColor: 'green'
+    }, 
+    multiselect: {
+        margin: 15
+    }
 })
 
 export default GroupPostForm;
