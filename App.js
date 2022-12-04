@@ -2,17 +2,23 @@ import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+
 import AccountScreen from "./src/screens/AccountScreen";
 import SigninScreen from "./src/screens/SigninScreen";
 import SignupScreen from './src/screens/SignupScreen';
 import GroupCreateScreen from './src/screens/GroupCreateScreen';
 import GroupDetailScreen from './src/screens/GroupDetailScreen';
 import GroupListScreen from './src/screens/GroupListScreen';
+import GroupEditScreen from './src/screens/GroupEditScreen';
 import ChatScreen from './src/screens/ChatScreen';
 import MapScreen from './src/screens/MapScreen';
-import {Provider as AuthProvider} from "./src/context/AuthContext";
-import { setNavigator } from './src/navigationRef';
 import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
+
+import { setNavigator } from './src/navigationRef';
+
+import {Provider as GroupProvider} from './src/context/GroupContext';
+import { Provider as PaperProvider } from 'react-native-paper';
+import {Provider as AuthProvider} from "./src/context/AuthContext";
 
 const switchNavigator = createSwitchNavigator({
     ResolveAuth: ResolveAuthScreen,
@@ -27,7 +33,8 @@ const switchNavigator = createSwitchNavigator({
       Groups: createStackNavigator ({
         GroupList: GroupListScreen,
         GroupDetail: GroupDetailScreen,
-        GroupCreate: GroupCreateScreen
+        GroupCreate: GroupCreateScreen,
+        GroupEdit: GroupEditScreen
       }), 
     })
 });
@@ -37,7 +44,11 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   return (
     <AuthProvider>
-      <App ref={(navigator) => {setNavigator(navigator)}}   />
+      <GroupProvider>
+        <PaperProvider>
+          <App ref={(navigator) => {setNavigator(navigator)}}   />
+        </PaperProvider>
+      </GroupProvider>
     </AuthProvider>
   )
 }

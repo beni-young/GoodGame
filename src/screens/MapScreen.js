@@ -7,7 +7,7 @@ import { requestForgroundPermissionAsync } from 'expo-location';
 
 const MapScreen = () => {
     return <SafeAreaView>
-        <Text h3>MapScreen</Text>
+        <Text h3>Home</Text>
         <Map />
     </SafeAreaView>
 }

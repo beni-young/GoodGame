@@ -1,12 +1,22 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import React, {useContext, useState} from 'react'
+import { View, StyleSheet } from 'react-native'
+import { Provider as PaperProvider, Text, TextInput, Button } from 'react-native-paper';
+import {Context} from "../context/GroupContext"
+import GroupPostForm from '../components/GroupPostForm';
 
-const GroupCreateScreen = () => {
-    return <View>
-        <Text style={{ fontSize: 48 }}>GroupCreateScreen</Text>
-    </View>
+const GroupCreateScreen = (props) => {
+
+    
+
+    const {addGroup} = useContext(Context);
+    return <GroupPostForm onSubmit={(title, description) => {
+        addGroup(title, description, () => { props.navigation.navigate("GroupDetail")})
+    }} />
+   
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    
+});
 
 export default GroupCreateScreen;
