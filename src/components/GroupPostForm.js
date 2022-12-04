@@ -42,7 +42,7 @@ GroupPostForm.defaultProps = {
 
 const styles = StyleSheet.create({
     input: {
-        fontSize: 10,
+        fontSize: 20,
         padding: 10,
         margin: 5
     },
