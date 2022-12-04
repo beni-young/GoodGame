@@ -5,6 +5,7 @@ import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 import {Context} from "../context/GroupContext";
 import GroupDetailScreen from '../screens/GroupDetailScreen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import {SimpleLineIcons} from '@expo/vector-icons'
 
 const Map = (props) => {   
 
@@ -71,8 +72,12 @@ const Map = (props) => {
                     </Marker>
             ))}
 
-            <Marker draggable coordinate={{latitude: 30.01947000085054, longitude: -90.06525841636753}} title={"Hello!!!"} />
-            <Marker coordinate={testRegion} title={"Test!!!"} />         
+            <Marker draggable coordinate={{latitude: 30.01947000085054, longitude: -90.06525841636753}} title={"I'm Gaming!!!"}>
+                <SimpleLineIcons name="game-controller" size={40} />
+            </Marker>
+            <Marker coordinate={testRegion} title={"I can't stop smiling!!!"} pinColor='#FFFFFF'>
+                <Icon name="mood" size={40}/>
+                </Marker>         
             {/* <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Current Location"} /> */}
             
 
