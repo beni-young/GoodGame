@@ -8,7 +8,9 @@ const groupReducer = (state, action) => {
             case 'add_group':
                 return [...state, { id: Math.floor(Math.random() * 9999), 
                         title: action.payload.title,
-                        description: action.payload.description
+                        description: action.payload.description,
+                        latitude: action.payload.latitude,
+                        longitude: action.payload.longitude                        
                     }
                 ]
             case 'delete_group':
@@ -31,8 +33,8 @@ const groupReducer = (state, action) => {
 
     
     const addGroup = (dispatch) => {
-        return (title, description, callback) => {
-                dispatch({ type: 'add_group', payload: {title: title, description: description} })
+        return (title, description,  latitude, longitude, callback) => {
+                dispatch({ type: 'add_group', payload: {title: title, description: description, latitude: latitude, longitude: longitude,} })
                 callback();
             }
     }
@@ -53,4 +55,4 @@ const groupReducer = (state, action) => {
 
 export const {Provider, Context} = createDataContext(
     groupReducer, {addGroup, deleteGroup, editGroup}, 
-    [{id: 1, title: "Test Group", description: "Test Description"}]);
+    [{id: 1, title: "Test Group", description: "Test Description", latitude: "30.023432002000366", longitude: "-90.06559621153748"}]);

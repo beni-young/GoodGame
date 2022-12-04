@@ -34,7 +34,7 @@ const switchNavigator = createSwitchNavigator({
         GroupList: GroupListScreen,
         GroupDetail: GroupDetailScreen,
         GroupCreate: GroupCreateScreen,
-        GroupEdit: GroupEditScreen
+        GroupEdit: GroupEditScreen,        
       }), 
     })
 });

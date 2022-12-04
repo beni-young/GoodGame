@@ -5,7 +5,7 @@ import Map from '../components/Map'
 import { Text } from 'react-native-elements'
 import { requestForgroundPermissionAsync } from 'expo-location';
 
-const MapScreen = () => {
+const MapScreen = (props) => {
     return <SafeAreaView>
         <Text h3>Home</Text>
         <Map />
@@ -13,7 +13,7 @@ const MapScreen = () => {
 }
 
 const styles = StyleSheet.create({
-
+    
 });
 
 export default MapScreen;

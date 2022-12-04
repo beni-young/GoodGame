@@ -18,6 +18,8 @@ const GroupDetailScreen = (props) => {
         <Text style={{ fontSize: 48 }}>GroupDetailScreen</Text>
         <Text>{groupPost.title}</Text>
         <Text>{groupPost.description}</Text>
+        <Text>{groupPost.latitude}</Text>
+        <Text>{groupPost.longitude}</Text>
     </View>
 }
 
