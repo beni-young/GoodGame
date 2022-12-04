@@ -9,8 +9,7 @@ const GroupListScreen = (props) => {
 
     const {state, addGroup, deleteGroup} = useContext(Context);
 
-    return <View>
-        <Text style={{ fontSize: 48 }}>GroupListScreen</Text>        
+    return <View>              
         <Button style={styles.button} mode="contained"
         onPress={() => {props.navigation.navigate("GroupCreate")}}>
             Create Group </Button>
@@ -43,7 +42,8 @@ const styles = StyleSheet.create({
         borderColor: 'grey'
     },
     title: {
-        fontSize: 18
+        fontSize: 18,
+        textAlign: 'center'
     },
     icon: {
         fontSize: 24

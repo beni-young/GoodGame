@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet} from 'react-native';
-import MapView, {Polyline, Marker} from 'react-native-maps';
+import {View,Text, StyleSheet} from 'react-native';
+import MapView, {Marker} from 'react-native-maps';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 
 const Map = () => {
 
@@ -19,7 +20,13 @@ const Map = () => {
         longitude: -90.06559621153748
     });    
 
-    return <MapView style={styles.map} 
+    const [googleRegion, setGoogleRegion] = useState({
+        latitude: 30.023432002000366, 
+        longitude: -90.06559621153748
+    });    
+
+    return <View>   
+        <MapView style={styles.map} 
             initialRegion= {{
                 latitude: 30.0273,
                 longitude: -90.0680,
@@ -32,14 +39,56 @@ const Map = () => {
          />
          <Marker coordinate={testRegion} title={"Test!!!"} />
          <Marker coordinate={schoolRegion} title={"School!!!"} />
+         <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Google"} />
          
     </MapView>
+    <View style={styles.searchContainer}>
+    <GooglePlacesAutocomplete       
+        placeholder='Set Your Group Location'
+        fetchDetails={true}
+        GooglePlacesSearchQuery={{
+            rankby: "distance"
+        }}
+        onPress={(data, details = null) => {
+        // 'details' is provided when fetchDetails = true
+        console.log(data, details);
+        setGoogleRegion({
+            latitude: details.geometry.location.lat,
+            longitude: details.geometry.location.lng,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+        })
+        }}
+      query={{ 
+        key: 'AIzaSyAQc2g4VdIeTkjNEjUvcMQ1mtYCQHIUhQQ', 
+        language: 'en',
+        components: "country:us",
+        radius: 30000, 
+        location: `${googleRegion.latitude}, ${googleRegion.longitude}`
+        }}
+    />
+    </View>
+    </View>    
 };
 
 const styles = StyleSheet.create({
     map: {
         height: 600
-    }
+    },
+    searchContainer: {
+        position: "absolute",
+        width: "90%",
+        backgroundColor: "white",
+        shadowColor: "black", 
+        shadowOffset: {width: 2, height: 2},
+        shadowOpacity: 0.5,
+        shadowRadius: 4,
+        elevation: 4,
+        padding: 8,
+        marginTop: 20,
+        marginLeft: 20,
+        borderRadius: 8,
+    },   
 });
 
 export default Map;
