@@ -4,6 +4,7 @@ import MapView, {Marker} from 'react-native-maps';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import {Context} from "../context/GroupContext";
 import GroupDetailScreen from '../screens/GroupDetailScreen';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const Map = (props) => {   
 
@@ -24,7 +25,27 @@ const Map = (props) => {
         longitude: -90.06559621153748,
         latitudeDelta: 0.01,
         longitudeDelta: 0.01,
-    });   
+    });  
+    
+    const CustomMarker = () => {
+        return <View>
+            <Icon name="location-history" size={50} color='#0000B3' />
+            <View style={{
+                width: 30,
+                height: 30,
+                borderRadius: 50,
+                backgroundColor: '#FFFFFF',
+                position: 'absolute',
+                left: 10,
+                top: 8,
+            }}>
+                <Icon style={{ textAlign: 'center',
+                top: 5,   
+            }}
+                 name='groups' size={20} color='#000000' />
+            </View>
+        </View>
+    }
 
     return <View>   
         <MapView 
@@ -45,12 +66,14 @@ const Map = (props) => {
                     coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
                     title={marker.title}
                     description={marker.description}
-                />
+                >
+                    <CustomMarker />
+                    </Marker>
             ))}
 
             <Marker draggable coordinate={{latitude: 30.01947000085054, longitude: -90.06525841636753}} title={"Hello!!!"} />
             <Marker coordinate={testRegion} title={"Test!!!"} />         
-            <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Current Location"} />
+            {/* <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Current Location"} /> */}
             
 
 
