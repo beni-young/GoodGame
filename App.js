@@ -2,7 +2,7 @@ import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
+import { LogBox} from 'react-native';
 import AccountScreen from "./src/screens/AccountScreen";
 import SigninScreen from "./src/screens/SigninScreen";
 import SignupScreen from './src/screens/SignupScreen';
@@ -17,8 +17,9 @@ import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import { setNavigator } from './src/navigationRef';
 
 import {Provider as GroupProvider} from './src/context/GroupContext';
-import { Provider as PaperProvider } from 'react-native-paper';
+import { Provider as PaperProvider} from 'react-native-paper';
 import {Provider as AuthProvider} from "./src/context/AuthContext";
+LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
 
 const switchNavigator = createSwitchNavigator({
     ResolveAuth: ResolveAuthScreen,

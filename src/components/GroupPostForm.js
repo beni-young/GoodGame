@@ -4,6 +4,7 @@ import { Text, TextInput, Button } from 'react-native-paper';
 import {Context} from "../context/GroupContext";
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import { MultipleSelectList } from 'react-native-dropdown-select-list'
+LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
 
 const GroupPostForm = (props) => {     
 
@@ -90,8 +91,6 @@ const GroupPostForm = (props) => {
             {props.onSubmit(title, description, googleRegion.latitude, googleRegion.longitude, gamelist, gametype );}}>Save Group</Button> 
     </ScrollView>
     </View>   
-    
-
 
 }
 
@@ -140,6 +139,5 @@ const styles = StyleSheet.create({
         margin: 15
     }
 })
-LogBox.ignoreLogs(['VirtualizedLists should never be nested inside plain ScrollViews with the same orientation - use another VirtualizedList-backed container instead.']);
 
 export default GroupPostForm;

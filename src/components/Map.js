@@ -21,11 +21,18 @@ const Map = (props) => {
 
     const [googleRegion, setGoogleRegion] = useState({
         latitude: 30.023432002000366, 
-        longitude: -90.06559621153748
+        longitude: -90.06559621153748,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
     });   
 
     return <View>   
-        <MapView style={styles.map} 
+        <MapView 
+            followsUserLocation={true}
+            zoomEnabled={true}
+            showsUserLocation={true}
+            region={googleRegion}
+            style={styles.map} 
             initialRegion= {{
                 latitude: 30.0273,
                 longitude: -90.0680,
@@ -43,14 +50,14 @@ const Map = (props) => {
 
             <Marker draggable coordinate={{latitude: 30.01947000085054, longitude: -90.06525841636753}} title={"Hello!!!"} />
             <Marker coordinate={testRegion} title={"Test!!!"} />         
-            <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Google"} />
+            <Marker coordinate={{latitude: googleRegion.latitude, longitude: googleRegion.longitude}} title={"Current Location"} />
             
 
 
         </MapView>
         <View style={styles.searchContainer}>
             <GooglePlacesAutocomplete       
-                placeholder='Set Your Group Location'
+                placeholder='Location'
                 fetchDetails={true}
                 GooglePlacesSearchQuery={{
                     rankby: "distance"

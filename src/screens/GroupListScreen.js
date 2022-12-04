@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import { View, StyleSheet, Text, FlatList, TouchableOpacity } from 'react-native'
-import { Provider as PaperProvider, Button } from 'react-native-paper';
+import { Avatar, Button } from 'react-native-paper';
 import {Context} from "../context/GroupContext";
 import {Feather} from '@expo/vector-icons'
 
@@ -9,7 +9,7 @@ const GroupListScreen = (props) => {
 
     const {state, addGroup, deleteGroup} = useContext(Context);
 
-    return <View>              
+    return <View style={styles.container}>              
         <Button style={styles.button} mode="contained"
         onPress={() => {props.navigation.navigate("GroupCreate")}}>
             Create Group </Button>
@@ -18,8 +18,9 @@ const GroupListScreen = (props) => {
             keyExtractor={(groupPost) => {return groupPost.title}}
             renderItem={ ({item}) => {
                 return <TouchableOpacity onPress={() => {props.navigation.navigate("GroupDetail", {id: item.id})}}>
-                            <View style={styles.row}>                     
-                                <Text style={styles.title}>{item.title}</Text>
+                            <View style={styles.row}> 
+                                <Avatar.Icon size={30} icon="account-group" />                    
+                                <Text style={styles.title}>{item.title} - {item.description}</Text>
                                 <TouchableOpacity onPress={() => {deleteGroup(item.id)} }     >
                                 <Feather name="trash" style={styles.icon} />
                                 </TouchableOpacity>
@@ -32,6 +33,10 @@ const GroupListScreen = (props) => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: 'white'
+    },
     row : {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -42,7 +47,7 @@ const styles = StyleSheet.create({
         borderColor: 'grey'
     },
     title: {
-        fontSize: 18,
+        fontSize: 15,
         textAlign: 'center'
     },
     icon: {
