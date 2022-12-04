@@ -34,7 +34,7 @@ const groupReducer = (state, action) => {
     
     const addGroup = (dispatch) => {
         return (title, description,  latitude, longitude, callback) => {
-                dispatch({ type: 'add_group', payload: {title: title, description: description, latitude: latitude, longitude: longitude,} })
+                dispatch({ type: 'add_group', payload: {title: title, description: description, latitude: latitude, longitude: longitude,}})
                 callback();
             }
     }
@@ -47,7 +47,7 @@ const groupReducer = (state, action) => {
 
     const editGroup = (dispatch) => {
         return (id, title, description, callback) => {
-            dispatch({type: 'edit_group', payload: { id: id, title: title, description: description}})
+            dispatch({type: 'edit_group', payload: { id: id, title: title, description: description, latitude: latitude, longitude: longitude}})
             callback();
         }
     }
@@ -55,4 +55,4 @@ const groupReducer = (state, action) => {
 
 export const {Provider, Context} = createDataContext(
     groupReducer, {addGroup, deleteGroup, editGroup}, 
-    [{id: 1, title: "Test Group", description: "Test Description", latitude: "30.023432002000366", longitude: "-90.06559621153748"}]);
+    [{id: 1, title: "Test Group", description: "Test Description", latitude: 30.023432002000366, longitude: -90.06559621153748}]);

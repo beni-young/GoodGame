@@ -36,6 +36,7 @@ const Map = (props) => {
         }}>
             {state.map((marker) => (
                 <Marker
+                    key={marker.id}
                     coordinate={{latitude: marker.latitude, longitude: marker.longitude}}
                     title={marker.title}
                     description={marker.description}
