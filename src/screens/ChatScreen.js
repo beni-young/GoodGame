@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { View, StyleSheet, Text, TextInput, FlatList } from 'react-native';
+import { View, StyleSheet, Text, TextInput, FlatList, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TextBubble from '../components/TextBubble';
+import {Ionicons} from '@expo/vector-icons';
 
 // Need a FlatList that displays the chat
 // The actual chat needs to be kept track of using state, and needs to come from the server
@@ -15,12 +16,15 @@ const ChatScreen = () => {
     //Array built to test the FlatList
     //In actual version, this should be inherited from props and kept track of in state
     const testChat = [
-        {user: "Person1",   
-        message: "testing chat 1"},
-        {user: "Person2",
-        message: "testing chat 2"},
-        {user: "Person3",
-        message: "testing chat 3"}
+        {user: "Vincent",   
+        message: "Y'all see the trailer that just dropped",
+        style: "otherUser"},
+        {user: "John",
+        message: "Yeah dude, can't wait to play the new DLC 💪😎",
+        style: "otherUser"},
+        {user: "Ben",
+        message: "When are we getting some matches going?",
+        style: "otherUser"}
     ]
 
     // State declaration that will be used to keep track of chat
@@ -38,7 +42,7 @@ const ChatScreen = () => {
 
             <View style={styles.header}>
                 <Text style={styles.groupName}>
-                    group name goes here
+                    The Group's name
                 </Text>
             </View>
 
@@ -46,23 +50,36 @@ const ChatScreen = () => {
                 <FlatList 
                     data = {chat}
                     renderItem={({item})=>{
-                        return <TextBubble message={item.message}/>;
+                        return <TextBubble message={item.message} user={item.user} style={item.style}/>;
                     }}
                 />
             </View>
 
-            <View style={styles.inputStyle}>
+            <View style={styles.inputView}>
                 <TextInput 
                     value={inputString}
                     autoCorrect={false}
                     autoCapitalize="none"
                     onChangeText={(newText)=>{setInputString(newText)}}
-                    onEndEditing={ ()=>{
-                        const newChat = [...chat,{user: "inputtingUser2", message: `${inputString}`}];
+                    onSubmitEditing={ ()=>{
+                        const newChat = [...chat,{user: "You", message: `${inputString}`, style: "thisUser"}];
                         setChat(newChat);
-                        console.log(chat);
-                        console.log(inputString);}}
+                        setInputString("");
+                        }}
+                    style={{
+                        borderColor:"#BBBBBB", 
+                        borderBottomWidth:2,
+                        height:25,
+                        padding: 2,
+                        flex: 9,
+                        marginRight:12
+                    }}
+                    placeholder="enter text here"
                 />
+                <TouchableOpacity style={{flex:1}}>
+                    <Ionicons name="send" size={20} style={{color:"#4474FF"}}/>
+                </TouchableOpacity>
+                
             </View>
             
         </SafeAreaView>
@@ -70,22 +87,31 @@ const ChatScreen = () => {
 
 const styles = StyleSheet.create({
     header:{
-        backgroundColor:"black",
+        backgroundColor:"#333333",
         height: 45,
-        padding:8,
+        padding:6,
+        paddingLeft:20,
+        borderBottomColor:"#999999",
+        borderBottomWidth: 5
+        
     }, 
     groupName:{
-        color: "white",
-        fontSize: 20
+        color: "#999999",
+        fontSize: 18,
+        alignSelf: 'flex-start'
     },  
     messageArea:{
         height: 575,
-        borderWidth:3,
-        borderColor:"red"
+        backgroundColor: "#DDDDDD"
     },
-    inputStyle:{
-        backgroundColor: "grey",
-        height: 75
+    inputView:{
+        backgroundColor: "#FFFFFF",
+        height: 30,
+        paddingVertical: 5,
+        paddingHorizontal: 14,
+        topBorderWidth:5,
+        topBorderColor: "#999999",
+        flexDirection:"row"
     }
 });
 
