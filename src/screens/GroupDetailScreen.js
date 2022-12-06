@@ -36,7 +36,7 @@ const GroupDetailScreen = (props) => {
 
             <Text style={styles.bodyHeader}>LOCATION</Text>
             <Text style={styles.bodyText}>
-            Longitude: {groupPost.longitude}{'\n'}Latitude: {groupPost.latitude}
+                Longitude: {groupPost.longitude}{'\n'}Latitude: {groupPost.latitude}
             </Text>
 
 
