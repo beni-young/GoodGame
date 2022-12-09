@@ -1,7 +1,8 @@
 import React, {useContext} from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image} from 'react-native'
 import {Context} from "../context/GroupContext"
 import { FontAwesome } from '@expo/vector-icons'
+// example banner taken from: https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/c3bedc075378d34386e0227463938244.png
 
 const GroupDetailScreen = (props) => {
 
@@ -15,13 +16,32 @@ const GroupDetailScreen = (props) => {
 
 
     return <View>
-        <Text style={{ fontSize: 48 }}>GroupDetailScreen</Text>
-        <Text>{groupPost.title}</Text>
-        <Text>{groupPost.description}</Text>
-        <Text>{groupPost.latitude}</Text>
-        <Text>{groupPost.longitude}</Text>
-        <Text>{groupPost.gamelist}</Text>
-        <Text>{groupPost.gametype}</Text>
+        <View style={styles.titleView}>
+            <Text style={styles.titleText}>{groupPost.title}</Text>
+        </View>
+
+        <Image source={require("../../assets/group-banner.png")} style={{height: 200, width:500}}/>
+
+        <View style={styles.bodyView}>
+
+            
+            <Text style={styles.bodyHeader}>GROUP DESCRIPTION</Text>
+            <Text style={styles.bodyText}>{groupPost.description}</Text>
+
+            <Text style={styles.bodyHeader}>GAMES</Text>
+            <Text style={styles.bodyText}>{groupPost.gamelist}</Text>
+
+            <Text style={styles.bodyHeader}>PLATORMS</Text>
+            <Text style={styles.bodyText}>{groupPost.gametype}</Text>
+
+            <Text style={styles.bodyHeader}>LOCATION</Text>
+            <Text style={styles.bodyText}>
+                Longitude: {groupPost.longitude}{'\n'}Latitude: {groupPost.latitude}
+            </Text>
+
+
+        </View>
+
     </View>
 }
 
@@ -37,7 +57,31 @@ GroupDetailScreen.navigationOptions = (props) => {
 
 const styles = StyleSheet.create({
     pencil: {
-        marginRight: 25
+        marginRight: 25,
+    },titleView:{
+        alignItems: "center",
+        backgroundColor:"#333333",
+        height:50,
+        justifyContent: "center"
+    },titleText:{
+        fontSize:25,
+        color:"#999999"
+    },bodyView:{
+        backgroundColor: "white",
+        height: 500
+    },bodyText:{
+        fontSize: 14,
+        marginHorizontal: 10,
+        marginBottom: 8,
+        borderBottomWidth: 3,
+        borderBottomColor:"#777777"
+
+    },bodyHeader:{
+        fontWeight: "bold",
+        fontSize: 16,
+        marginTop: 5,
+        marginHorizontal:10,
+        color:'#777777'
     }
 });
 

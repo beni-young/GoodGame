@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
     },
     link: {
         color: 'blue'
-    }
+    },
+
 });
 
 export default SignupScreen;

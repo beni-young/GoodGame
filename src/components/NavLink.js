@@ -11,6 +11,12 @@ const NavLink = ({navigation, text, routeName}) => {
     </TouchableOpacity>
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    link:{
+        fontSize:15,
+        color:"#3366CC",
+        alignSelf:'center'
+    }
+});
 
 export default withNavigation(NavLink);
