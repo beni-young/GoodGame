@@ -3,7 +3,7 @@
 
 Good Game is a social media platform built around connecting our users with other people in their local area who share similar interests in gaming.
 ## About   
-We’re aiming to create an app that can be the first place for people to build or get involved in their local gaming scenes such as taking some of the work and intimidation out of doing things like starting a Dungeons & 
+A mobile app that can be the first place for people to build or get involved in their local gaming scenes such as taking some of the work and intimidation out of doing things like starting a Dungeons & 
 Dragons group in your area, joining in on local board game nights, or participating in a nearby fighting game tournament. 
 
 Whether you're looking to meet new people, learn new games, find groups to play with, or get out of your comfort zone, Good Game can assist. 
